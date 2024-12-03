@@ -1,14 +1,14 @@
 # Github Link: 
-https://github.com/Selviniahh/Assignment2DistributedAppDev
+https://github.com/Selviniahh/Assignment3DistributedAppDev
 
 # URL of the project 
 ```angular2html
-http://localhost:3000
+https://assignment3-distributed-app-1shttd6oa-kenans-projects-180eb90b.vercel.app
 ```
 
 # Test Languages
 ```angular2html
-http://localhost:3000/api/languages
+https://assignment3-distributed-app-1shttd6oa-kenans-projects-180eb90b.vercel.app/api/languages
 ```
 
 ### Output you should get: 
@@ -25,7 +25,7 @@ language	"Turkish"
 
 # Test timesOfDay
 ```angular2html
-http://localhost:3000/api/timesOfDay
+https://assignment3-distributed-app-1shttd6oa-kenans-projects-180eb90b.vercel.app/timesOfDay
 ```
 ### Output you should get
 ```angular2html
@@ -41,9 +41,14 @@ timeOfDay	"Morning"
 
 # Test Greet
 ```
-curl -X POST http://localhost:3000/api/greet -H "Content-Type: application/json" -d '{"timeOfDay": "Evening", "language": "English", "tone": "Formal"}'
+curl -X POST https://assignment3-distributed-app-1shttd6oa-kenans-projects-180eb90b.vercel.app/api/greet -H "Content-Type: application/json" -d '{"timeOfDay": "Evening", "language": "English", "tone": "Formal"}'
 ```
 ### Output you should get:
 ```
 {"greetingMessage":"Good evening"}
 ```
+
+# Test Console 
+Navigate to **GreetingClient** 
+
+call `dotnet build` then `dotnet run` type necessary texts and run the project.

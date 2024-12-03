@@ -44,7 +44,7 @@ namespace GreetingClient
 
     class Program
     {
-        private static readonly string BaseUrl = "https://assignment3-distributed-app-c0shbycbq-kenans-projects-180eb90b.vercel.app";
+        private static readonly string BaseUrl = "https://assignment3-distributed-app-1shttd6oa-kenans-projects-180eb90b.vercel.app"; //I wasted hours to find out why URL doesn't work and finally I found out for some reason this URL in this string is different than what it needs to be. 
         private static readonly HttpClient client = new HttpClient();
 
         static async Task Main(string[] args)
@@ -85,10 +85,7 @@ namespace GreetingClient
             StringContent content = new StringContent(greetJson, Encoding.UTF8, "application/json");
             HttpResponseMessage greetResponse = await client.PostAsync($"{BaseUrl}/api/greet", content);
             
-            
-            
             string greetResponseJson = await greetResponse.Content.ReadAsStringAsync(); //Make it case insensitive
-            Console.WriteLine($"Raw Response: {greetResponseJson}");
             GreetResponse greet = JsonSerializer.Deserialize<GreetResponse>(greetResponseJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             Console.WriteLine($"\nGreeting Message: {greet.GreetingMessage}");
         }
