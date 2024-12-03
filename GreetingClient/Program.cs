@@ -44,7 +44,7 @@ namespace GreetingClient
 
     class Program
     {
-        private static readonly string BaseUrl = "http://localhost:3000";
+        private static readonly string BaseUrl = "https://assignment3-distributed-app-c0shbycbq-kenans-projects-180eb90b.vercel.app";
         private static readonly HttpClient client = new HttpClient();
 
         static async Task Main(string[] args)
@@ -71,7 +71,7 @@ namespace GreetingClient
             string timeOfDay = Console.ReadLine();
             Console.WriteLine("Enter Language:");
             string language = Console.ReadLine();
-            Console.WriteLine("Enter Tone (Formal/Casual it's ase insensitive):");
+            Console.WriteLine("Enter Tone (Formal/Casual it's case insensitive):");
             string tone = Console.ReadLine();
 
             var greetRequest = new GreetRequest
@@ -84,7 +84,11 @@ namespace GreetingClient
             string greetJson = JsonSerializer.Serialize(greetRequest);
             StringContent content = new StringContent(greetJson, Encoding.UTF8, "application/json");
             HttpResponseMessage greetResponse = await client.PostAsync($"{BaseUrl}/api/greet", content);
+            
+            
+            
             string greetResponseJson = await greetResponse.Content.ReadAsStringAsync(); //Make it case insensitive
+            Console.WriteLine($"Raw Response: {greetResponseJson}");
             GreetResponse greet = JsonSerializer.Deserialize<GreetResponse>(greetResponseJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             Console.WriteLine($"\nGreeting Message: {greet.GreetingMessage}");
         }

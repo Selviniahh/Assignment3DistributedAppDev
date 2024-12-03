@@ -77,30 +77,38 @@ async function seedDatabase() {
 
 // API endpoint to get a greeting
 app.post('/api/greet', async (req, res) => {
-    const {timeOfDay, language, tone} = req.body;
+    const { timeOfDay, language, tone } = req.body;
 
     if (!timeOfDay || !language || !tone) {
         return res
             .status(400)
-            .json({error: 'timeOfDay, language, and tone are required'});
+            .json({ error: 'timeOfDay, language, and tone are required' });
     }
 
     try {
         const result = await pool.query(
-            'SELECT greetingMessage FROM greetings WHERE timeOfDay = $1 AND language = $2 AND tone = $3',
-            [timeOfDay, language, tone]
-        );
+    `SELECT greetingMessage FROM greetings
+     WHERE LOWER(timeOfDay) = LOWER($1)
+       AND LOWER(language) = LOWER($2)
+       AND LOWER(tone) = LOWER($3)`,
+    [timeOfDay, language, tone]
+);
+
         const greeting = result.rows[0];
 
         if (greeting) {
-            res.json({greetingMessage: greeting.greetingMessage});
+            // Log the greeting object to see the actual property names
+            console.log('Greeting:', greeting);
+
+            res.json({ greetingMessage: greeting.greetingmessage });
         } else {
-            res.status(404).json({error: 'Greeting not found'});
+            res.status(404).json({ error: 'Greeting not found' });
         }
     } catch (err) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({ error: err.message });
     }
 });
+
 
 // API endpoint to get times of day
 app.get('/api/timesOfDay', async (req, res) => {
